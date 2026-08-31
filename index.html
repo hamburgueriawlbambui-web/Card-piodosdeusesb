@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WL Hambúrgueria dos Deuses</title>
+<meta name="description" content="Cardápio digital da WL Hambúrgueria dos Deuses — peça pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Lightning bolt divider template (reused via CSS background) -->
+
+<header class="hero">
+  <div class="hero-glow"></div>
+  <nav class="topbar">
+    <img src="logo.jpg" alt="WL Hambúrgueria dos Deuses" class="brand-logo">
+    <button class="cart-pill" id="openCartTop" aria-label="Abrir carrinho">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 3h2l2.4 12.4a2 2 0 002 1.6h8.2a2 2 0 002-1.6L21 8H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="21" r="1.4" fill="currentColor"/><circle cx="18" cy="21" r="1.4" fill="currentColor"/></svg>
+      <span id="cartCountTop">0</span>
+    </button>
+  </nav>
+
+  <div class="hero-content">
+    <img src="logo.jpg" alt="WL Hambúrgueria dos Deuses — Prove o poder dos deuses" class="hero-logo">
+    <p class="hero-sub">Hambúrgueres artesanais forjados no Olimpo. Monte seu pedido e receba no WhatsApp.</p>
+    <a href="#cardapio" class="cta-scroll">Ver cardápio ↓</a>
+  </div>
+</header>
+
+<main id="cardapio">
+
+  <section class="menu-section" id="hamburgueres">
+    <h2 class="section-title"><span class="section-num">I</span> Hambúrgueres</h2>
+    <div class="bolt-divider" aria-hidden="true"></div>
+    <div class="grid" id="grid-hamburgueres"></div>
+  </section>
+
+  <section class="menu-section" id="porcoes">
+    <h2 class="section-title"><span class="section-num">II</span> Porções</h2>
+    <div class="bolt-divider" aria-hidden="true"></div>
+    <div class="grid" id="grid-porcoes"></div>
+  </section>
+
+  <section class="menu-section" id="bebidas">
+    <h2 class="section-title"><span class="section-num">III</span> Bebidas</h2>
+    <div class="bolt-divider" aria-hidden="true"></div>
+    <div class="grid" id="grid-bebidas"></div>
+  </section>
+
+  <section class="menu-section" id="combos">
+    <h2 class="section-title"><span class="section-num">IV</span> Combos</h2>
+    <div class="bolt-divider" aria-hidden="true"></div>
+    <div class="grid" id="grid-combos"></div>
+  </section>
+
+  <section class="menu-section" id="sobremesas">
+    <h2 class="section-title"><span class="section-num">V</span> Sobremesas</h2>
+    <div class="bolt-divider" aria-hidden="true"></div>
+    <div class="grid" id="grid-sobremesas"></div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>WL Hambúrgueria dos Deuses — pedidos via WhatsApp</p>
+</footer>
+
+<!-- Floating cart button (mobile-friendly) -->
+<button class="fab-cart" id="openCartFab" aria-label="Abrir carrinho">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 3h2l2.4 12.4a2 2 0 002 1.6h8.2a2 2 0 002-1.6L21 8H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="21" r="1.4" fill="currentColor"/><circle cx="18" cy="21" r="1.4" fill="currentColor"/></svg>
+  <span class="fab-count" id="cartCountFab">0</span>
+</button>
+
+<!-- Cart drawer -->
+<div class="overlay" id="overlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Carrinho">
+  <div class="cart-header">
+    <h3>Seu pedido</h3>
+    <button class="close-cart" id="closeCart" aria-label="Fechar carrinho">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty" id="cartEmptyMsg">Seu carrinho está vazio. O Olimpo espera sua fome.</p>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-subtotal-row">
+      <span>Subtotal</span>
+      <span id="cartSubtotal">R$ 0,00</span>
+    </div>
+    <div class="cart-subtotal-row">
+      <span>Taxa de entrega</span>
+      <span id="cartDelivery">R$ 3,00</span>
+    </div>
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span id="cartTotal">R$ 0,00</span>
+    </div>
+    <div class="cart-customer-fields">
+      <input type="text" id="custName" placeholder="Seu nome" autocomplete="name">
+      <input type="text" id="custAddress" placeholder="Endereço (rua, número, bairro)" autocomplete="street-address">
+      <input type="text" id="custReference" placeholder="Ponto de referência">
+      <select id="custPayment">
+        <option value="" disabled selected>Forma de pagamento</option>
+        <option value="Dinheiro">Dinheiro</option>
+        <option value="Cartão de crédito">Cartão de crédito</option>
+        <option value="Cartão de débito">Cartão de débito</option>
+        <option value="Pix">Pix</option>
+      </select>
+    </div>
+    <textarea id="cartNotes" placeholder="Observações (ex: ponto da carne, sem cebola...)" rows="2"></textarea>
+    <button class="checkout-btn" id="checkoutBtn">Finalizar pelo WhatsApp</button>
+  </div>
+</aside>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
